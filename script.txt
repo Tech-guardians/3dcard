@@ -1,0 +1,16 @@
+ VanillaTilt.init(document.querySelector(".tilt-effect"), {
+      max: 25,
+      speed: 400,
+      glare: true,
+      gryroscope:true,
+      "max-glare": 0.5,
+    });
+    var gn = new GyroNorm();
+    gn.init().then(function () {
+      gn.start(function(data){
+        var tiltValue = data.do.beta + 90;
+        document.getElementById("instagram").style.transform = `rotate(${tiltValue}deg)`;
+        document.getElementById("facebook").style.transform = `rotate(${tiltValue}deg)`;
+        document.getElementById("github").style.transform = `rotate(${tiltValue}deg)`;
+      });
+    });

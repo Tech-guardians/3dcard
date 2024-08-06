@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3d-card</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" integrity="sha512-wC/cunGGDjXSl9OHUH0RuqSyW4YNLlsPwhcLxwWW1CR4OeC2E1xpcdZz2DeQkEmums41laI+eGMw95IJ15SS3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gyronorm.js/2.0.1/gyronorm.min.js"></script>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body{
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(49deg, black, purple, rgb(127, 127, 225), red, green);
+        background-size: 400% 400%;
+        animation: gradientAnimation 10s ease infinite;
+    }
+    @keyframes gradientAnimation {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+    .glass-card{
+        width: 480px;
+        height: 500px;
+        background: rgba(225, 225, 225, 0.2);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    p{
+        color: #fff;
+    }
+    img{
+        max-width: 122px;
+        border-radius: 70%;
+        perspective: 4000px;
+        transform-style: preserve-3d;
+        transform: translateZ(50px);
+    }
+    p.text-effect{
+        font-family: sans-serif;
+        font-size: 16px;
+    }
+    .list tilt-effect ul{
+        list-style: none;
+        padding: 5px;
+    }
+    .list li{
+        list-style: none;
+        padding: 5px;
+    }
+    .list a i{
+        font-size: 4em;
+        color: #000000;
+        transition: color 0.3s ease;
+    }
+    .list a i:hover{
+        color: rgb(225, 225, 225);
+    }
+    .tilt-effect{
+        will-change: transform, transform-origin, filter;
+        perspective: 4000px;
+        transform-style: preserve-3d;
+    }
+    p.tilt-effect{
+        perspective: 4000px;
+        transform-style: preserve-3d;
+        transform: translateZ(50px);
+    }
+    .list a.tilt-effect:hover{
+        perspective: 4000px;
+        transform-style: preserve-3d;
+        transform: translateZ(50px);
+    }
+    .list a.tilt-effect{
+        display: inline-block;
+        margin: 0 10px;
+        perspective: 4000px;
+        transform-style: preserve-3d;
+        transform: translateZ(50px);
+    }
+    .list li{
+        display: inline-block;
+        margin: 0 0px;
+    }
+    .list li i{
+        perspective: 4000px;
+        transform-style: preserve-3d;
+        transform: translateZ(50px);
+    }
+</style>
+<body>
+    <div class="glass-card tilt-effect">
+        <img src="Picsart_24-06-30_13-29-05-637.jpg" alt="yourimage">
+        <p class="tilt-effect">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum temporibus ut officia illum, totam ipsam vitae pariatur, nihil cupiditate velit eaque, quaerat consequuntur expedita. Quia eius inventore beatae aspernatur accusamus id ipsum facere veritatis. Laudantium vel soluta ducimus corporis doloribus quidem numquam perspiciatis animi deserunt. Minima praesentium esse a modi magni sit quia tempora voluptates ducimus, expedita vero sunt maxime dolores voluptatem, corrupti voluptas doloremque. Magni ullam quaerat quo obcaecati dolores dolore quidem nam deserunt sed animi quasi voluptas, corporis veniam voluptatibus id! Tempore, officiis obcaecati.
+        </p>
+        <div class="list tilt-effect">
+            <ul>
+                <li><a href="your links"><i class="fa-brands fa-instagram"></i></a></li>
+                <li><a href="your links"><i class="fa-brands fa-facebook"></i></a></li>
+                <li><a href="your links"><i class="fa-brands fa-github"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+     VanillaTilt.init(document.querySelector(".tilt-effect"), {
+      max: 25,
+      speed: 400,
+      glare: true,
+      gryroscope:true,
+      "max-glare": 0.5,
+    });
+    var gn = new GyroNorm();
+    gn.init().then(function () {
+      gn.start(function(data){
+        var tiltValue = data.do.beta + 90;
+        document.getElementById("instagram").style.transform = `rotate(${tiltValue}deg)`;
+        document.getElementById("facebook").style.transform = `rotate(${tiltValue}deg)`;
+        document.getElementById("github").style.transform = `rotate(${tiltValue}deg)`;
+      });
+    });
+    </script>
+</body>
+</html>
